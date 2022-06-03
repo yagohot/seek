@@ -6,28 +6,28 @@ $usuario=$_POST['usuario'];
 $email=$_POST['email'];
 $contrasena=$_POST['contrasena'];
 $contrasena2=$_POST['contrasena2'];
-
+if (empty($usuario) or empty($email) or empty($contrasena) or empty($contrasena2)){ die("Falta informacion");}
 if($contrasena!=$contrasena2){
     die("contraseña distinta");
 }
 
-$sentencia = "SELECT * FROM tUsers WHERE nombre=".$usuario.'';
+$sentencia = "SELECT * FROM tUsers WHERE nombre=?";
 $stmt = $db->prepare($sentencia);
 $stmt->bind_param("s",$usuario);
 $stmt->execute();
 $resultado = $stmt->get_result();
 
-if($result->num_rows==1){
+if($resulto->num_rows==1){
     die ('usuario duplicado');
 }
 else{
-    $sentencia2= "SELECT * FROM tUsers WHERE email=".$email.'';
+    $sentencia= "SELECT * FROM tUsers WHERE email=?";
     $stmt = $db->prepare($sentencia2);
     $stmt->bind_param("s",$email);
     $stmt->execute();
     $resultado = $stmt->get_result();
 
-    if($result->num_rows==1){
+    if($resulto->num_rows==1){
         die ('email duplicado');
     }
 }
