@@ -17,7 +17,7 @@ $stmt->bind_param("s",$usuario);
 $stmt->execute();
 $resultado = $stmt->get_result();
 
-if($resulto->num_rows==1){
+if($resultado->num_rows==1){
     die ('usuario duplicado');
 }
 else{
@@ -27,7 +27,7 @@ else{
     $stmt->execute();
     $resultado = $stmt->get_result();
 
-    if($resulto->num_rows==1){
+    if($resultado->num_rows==1){
         die ('email duplicado');
     }
 }
