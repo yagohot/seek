@@ -5,7 +5,7 @@
    $usuario = $_POST['usuario'];
    $contrasena = $_POST['password'];
 
-   $sql = "SELECT * FROM tUsers WHERE nombre = ".$usuario.'';
+   $sql = "SELECT * FROM tUsers WHERE nombre = '".$usuario."'";
 
    $resultado =mysqli_query($db,$sql);
 
@@ -19,3 +19,4 @@
            header('Location: main.php');
        }
    }
+?>

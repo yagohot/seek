@@ -11,7 +11,7 @@ CREATE TABLE tFilms(
     disponible_netflix BOOL,
     disponible_hbo BOOL,
     disponible_amazon BOOL,
-    disponible_diney BOOL,
+    disponible_disney BOOL,
     año int NOT NULL
 );
 

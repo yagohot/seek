@@ -21,16 +21,16 @@ if(!isset($_SESSION['user_id'])){
  <label>Texto de búsqueda</label>
  <input id="searched_text" name="searched_text" type="text"/>
 
- <input type="submit" name="buscar" value="buscar">Buscar</input>
+ <input type="submit" name="buscar" value="buscar"/>
 </form>
 <?php
 if(isset($_POST['searched_text'])){
     $buscar = $_POST['searched_text'];
     require __DIR__ .'/db_connection.php';
     $db = get_db_connection_or_die();
-    $sql = "SELECT * FROM tFilms WHERE nombre = ".$buscar.'';
+    $sql = "SELECT * FROM tFilms WHERE nombre LIKE '%".$buscar."%'";
     $resultado = mysqli_query($db,$sql);
-    $resultados = mysqli_num_rows($resultado);
+    $count_results = mysqli_num_rows($resultado);
 
     if($count_results>0){
         echo '<p>Hay' .$count_results.' resultados';
@@ -40,8 +40,10 @@ if(isset($_POST['searched_text'])){
             echo '<p>'.$row_searched['genero'].'</p>';
             echo '<p>'.$row_searched['año'].'</p>';
             echo '<form method="post" action="/do_add_to_list.php">';
-            echo '<input type="hidden" name="film_id"/>';
-            echo '<input type="submit" name="agregar" value="agregar">Agregar</input>';
+            echo '<input type="hidden" name="film_id" value='.$row_searched['id'].'/>';
+			if(isset($_SESSION['user_id'])){
+				echo '<input type="submit" name="agregar" value="agregar"/>';
+			}
             echo '</form>';
         }
     }else{
@@ -50,5 +52,10 @@ if(isset($_POST['searched_text'])){
 }
 ?>
     <a href="/my_list.php">Lista</a>
+<?php
+if(isset($_SESSION['user_id'])){
+	echo '</br><a href="/do_logout.php">Cerrar sesión</a>';
+}
+?>
 </body>
 </html>

@@ -21,8 +21,9 @@ if($resultado->num_rows==1){
     die ('usuario duplicado');
 }
 else{
+	
     $sentencia= "SELECT * FROM tUsers WHERE email=?";
-    $stmt = $db->prepare($sentencia2);
+    $stmt = $db->prepare($sentencia);
     $stmt->bind_param("s",$email);
     $stmt->execute();
     $resultado = $stmt->get_result();
@@ -33,15 +34,23 @@ else{
 }
 
 try{
+	
     $registro = "INSERT INTO tUsers (nombre,email,password) VALUES (?,?,?)";
     $stmt=$db->prepare($registro);
     $password = password_hash($_POST['password'],PASSWORD_BCRYPT);
-    $stmt->bind_param("sss",$usuario,$email,$contrasena);
+    $stmt->bind_param("sss",$usuario,$email,$password);
     $stmt->execute();
     $stmt->close();
+	
+	header ('Location: login.php');
+	
 }catch(Exception $e){
+	
+	
+	
     error_log($e);
+	
 }
 
-mysqli_close();
+mysqli_close($db);
 ?>

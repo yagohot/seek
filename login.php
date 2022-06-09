@@ -16,6 +16,6 @@
  <label>Contraseña</label>
  <input id="contrasena" name="contrasena" type="password"/>
 
- <button type="submit" name="login" value="entrar">Entrar</button>
+ <button type="submit" name="login">Entrar</button>
 </body>
 </html>
