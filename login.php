@@ -14,7 +14,7 @@
  <input id="usuario" name="usuario" type="text"/>
 
  <label>Contraseña</label>
- <input id="contrasena" name="contrasena" type="password"/>
+ <input id="pwd" name="pwd" type="password"/>
 
  <button type="submit" name="login">Entrar</button>
 </body>

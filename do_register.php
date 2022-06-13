@@ -37,7 +37,7 @@ try{
 	
     $registro = "INSERT INTO tUsers (nombre,email,password) VALUES (?,?,?)";
     $stmt=$db->prepare($registro);
-    $password = password_hash($_POST['password'],PASSWORD_BCRYPT);
+    $password = password_hash($contrasena,PASSWORD_BCRYPT);
     $stmt->bind_param("sss",$usuario,$email,$password);
     $stmt->execute();
     $stmt->close();
